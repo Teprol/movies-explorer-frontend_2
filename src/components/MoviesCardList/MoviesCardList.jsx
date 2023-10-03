@@ -11,21 +11,21 @@ function MoviesCardList() {
     const { pathname } = useLocation(); //отселдить урл
 
     return (
-        <section className="movies-cardList">
-            <ul className="movies-cardList__list list">
+        <section className="movies-card-list">
+            <ul className="movies-card-list__list list">
                 {isLoading && <Preloader></Preloader>}
-                <MoviesCard className="movies-cardList__item"></MoviesCard>
-                <MoviesCard className="movies-cardList__item"></MoviesCard>
-                <MoviesCard className="movies-cardList__item"></MoviesCard>
-                <MoviesCard className="movies-cardList__item"></MoviesCard>
-                <MoviesCard className="movies-cardList__item"></MoviesCard>
+                <MoviesCard className="movies-card-list__item"></MoviesCard>
+                <MoviesCard className="movies-card-list__item"></MoviesCard>
+                <MoviesCard className="movies-card-list__item"></MoviesCard>
+                <MoviesCard className="movies-card-list__item"></MoviesCard>
+                <MoviesCard className="movies-card-list__item"></MoviesCard>
             </ul>
             {pathname === '/saved-movies'
                 ?
-                <div className="movies-cardList__download-more_movie-save ">
+                <div className="movies-card-list__download-more movies-card-list__download-more_movie-save ">
                 </div>
                 :
-                <div className="movies-cardList__download-more">
+                <div className="movies-card-list__download-more">
                     <Button className="button_more">Ещё</Button>
                 </div>
             }

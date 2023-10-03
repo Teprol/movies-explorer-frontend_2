@@ -1,6 +1,6 @@
 .error-page {
   box-sizing: border-box;
-  height: 100vh;
+  /* height: 100vh; */
   padding: 246px 0 60px;
   display: flex;
   justify-content: center;

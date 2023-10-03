@@ -16,7 +16,7 @@
   position: relative;
 }
 
-.header-nav__burger-menu {
+.header-nav__item_burger-menu {
   box-sizing: border-box;
   display: none;
 }
@@ -27,7 +27,7 @@
     display: none;
   }
 
-  .header-nav__burger-menu {
+  .header-nav__item_burger-menu {
     box-sizing: border-box;
     display: block;
   }
@@ -114,7 +114,7 @@
   overflow: hidden;
 }
 
-.burger-menu__active {
+.burger-menu_active {
   visibility: visible;
   opacity: 1;
   z-index: 1;

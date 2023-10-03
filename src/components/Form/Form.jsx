@@ -29,7 +29,7 @@ function Form({ name, children, className }) {
                             ?
                             <>
                                 <p className="form__submit-error"></p>
-                                <Button className="button_submit form__button" type="button" onClick={profileEdit}>Редактировать</Button>
+                                <Button className="button_submit form__button" type="button" onClick={profileEdit}>Сохранить</Button>
                             </>
                             :
                             <>

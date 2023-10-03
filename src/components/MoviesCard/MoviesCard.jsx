@@ -21,8 +21,8 @@ function MoviesCard({ className }) {
                     <h2 className="movies-card__title">В погоне за Бенкси</h2>
                     <p className="movies-card__date">0ч 42м</p>
                 </div>
-                <a href="#" className="link movies-card__link hover">
-                    <img className="movies-card__image image" src={image} alt="" />
+                <a href="https://www.youtube.com/watch?v=g85ErgcyqX8" className="link movies-card__link hover" target="_blank" rel="noreferrer">
+                    <img className="movies-card__image image" src={image} alt="женщина фотограф общается с детьми уперевшись на машину" />
                 </a>
                 {pathname === '/saved-movies' ?
                     <Button className="movies-card__button button hover button_card-delete" type="button"></Button>

@@ -7,6 +7,7 @@
 }
 
 .filter-Checkbox__slider {
+  display: block;
   box-sizing: border-box;
   padding: 6px 6px;
 

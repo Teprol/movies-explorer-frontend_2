@@ -35,14 +35,14 @@ function HeaderNav({ loggedIn }) {
                         <li className="header-nav__item">
                             <ButtonProfile className="header-nav__button-profile hover header-nav__link"></ButtonProfile>
                         </li>
-                        <li className="header-nav__item header-nav__burger-menu">
+                        <li className="header-nav__item header-nav__item_burger-menu">
                             <button className="header-nav__button-burger button hover" type='button' aria-label="кнопка для входа в профиль" onClick={handleBurgerMenu}></button>
                         </li>
                     </>
                     :
                     <>
                         <li className="header-nav__item">
-                            <Link to="/signup" className="link hover">Регистрация</Link>
+                            <Link to="/signup" className="header-nav__link link hover">Регистрация</Link>
                         </li>
                         <li className="header-nav__item">
                             <Link to="/signin" className="link header-nav__link-login hover">Войти</Link>
@@ -52,16 +52,16 @@ function HeaderNav({ loggedIn }) {
             </ul>
             {loggedIn &&
                 <>
-                    <section className={`header-nav__burger-section burger-menu ${burgerActive ? "burger-menu__active" : ""}`} aria-label="навигация для мобильных приложений">
+                    <section className={`burger-menu header-nav__burger-section ${burgerActive ? "burger-menu_active" : ""}`} aria-label="навигация для мобильных приложений">
                         <div className={`burger-menu__container ${burgerActive ? "burger-menu__container_active" : ""}`}>
                             <ul className="burger-menu__nav list">
-                                <li className="burger-menu__nav--item">
+                                <li className="burger-menu__nav-item">
                                     <NavLink to="/" className={({ isActive }) => `${isActive ? "burger-menu__link_active" : ""} burger-menu__link link hover`}>Главная</NavLink>
                                 </li>
-                                <li className="burger-menu__nav--item">
+                                <li className="burger-menu__nav-item">
                                     <NavLink to="/movies" className={({ isActive }) => `${isActive ? "burger-menu__link_active" : ""} burger-menu__link link hover`}>Фильмы</NavLink>
                                 </li>
-                                <li className="burger-menu__nav--item">
+                                <li className="burger-menu__nav-item">
                                     <NavLink to="/saved-movies" className={({ isActive }) => `${isActive ? "burger-menu__link_active" : ""} burger-menu__link link hover`}>Сохранённые фильмы</NavLink>
                                 </li>
                             </ul>

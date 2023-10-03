@@ -16,8 +16,8 @@ function Login() {
                 </Link>
                 <h2 className="login__title">Рады видеть!</h2>
                 <Form className="login__form" name="login">
-                    <Input className="input_label-top" type="email" title="E-mail" placeholder="Почта" name="email"></Input>
-                    <Input className="input_label-top" type="password" title="Пароль" placeholder="Пароль" name="password"></Input>
+                    <Input className="input_label-top" type="email" title="E-mail" placeholder="Почта" name="email" minLength="5"></Input>
+                    <Input className="input_label-top" type="password" title="Пароль" placeholder="Пароль" name="password" minLength="4" maxLength="18"></Input>
                 </Form>
             </div>
         </main>

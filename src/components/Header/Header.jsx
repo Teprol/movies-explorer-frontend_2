@@ -9,8 +9,8 @@ function Header({ loggedIn }) {
 
     return (
         <header className={`header ${pathname === '/' ? 'header_promo' : 'header_project'} ${!loggedIn ? 'header_noAuth' : ""}`}>
-            <Link to="/" className="hover">
-                <img src={logo} alt="Логотип" className="image" />
+            <Link to="/" className="header__link hover">
+                <img src={logo} alt="Логотип" className="header__image image" />
             </Link>
             <HeaderNav loggedIn={loggedIn}></HeaderNav>
         </header>

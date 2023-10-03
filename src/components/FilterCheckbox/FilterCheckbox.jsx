@@ -5,7 +5,7 @@ function FilterCheckbox() {
     return (
         <label className="filter-Checkbox">
             <input type="checkbox" className="filter-Checkbox__input"></input>
-            <div className="filter-Checkbox__slider"></div>
+            <span className="filter-Checkbox__slider"></span>
         </label>
     );
 };

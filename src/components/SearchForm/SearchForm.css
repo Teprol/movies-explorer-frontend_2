@@ -1,16 +1,16 @@
-.searchForm {
+.search-form {
   box-sizing: border-box;
   padding: 70px var(--padding-desctop) 10px;
 }
 
-.searchForm__fieldset-search {
+.search-form__fieldset-search {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   border: none;
 }
 
-.searchForm__container-search {
+.search-form__container-search {
   box-sizing: border-box;
   display: flex;
   padding: 9px 9px 9px 25px;
@@ -19,7 +19,7 @@
   border-radius: 8px;
 }
 
-.searchForm__search {
+.search-form__search {
   width: 100%;
   box-sizing: border-box;
   flex: 1;
@@ -35,7 +35,7 @@
   line-height: 20px; /* 111.111% */
 }
 
-.searchForm__errors {
+.search-form__errors {
   /* box-sizing: border-box; */
   margin: 0;
   padding: 3px 0;
@@ -45,14 +45,14 @@
   font-size: 14px;
 }
 
-.searchForm__container-checkbox {
+.search-form__container-checkbox {
   display: flex;
   column-gap: 14px;
   padding: 0 0 43px;
   border-bottom: 1px solid #ababab33;
 }
 
-.searchForm__checkbox-text {
+.search-form__checkbox-text {
   margin: 0;
   font-size: 13px;
   font-style: normal;
@@ -60,7 +60,7 @@
   line-height: 18px;
 }
 
-.searchForm__checkbox-input {
+.search-form__checkbox-input {
   width: 0;
   height: 0;
   opacity: 0;
@@ -68,7 +68,7 @@
   display: block;
 }
 
-.searchForm__checkbox-slider {
+.search-form__checkbox-slider {
   box-sizing: border-box;
   padding: 6px 6px;
 
@@ -79,7 +79,7 @@
   transition: background-color 0.7s;
 }
 
-.searchForm__checkbox-slider::before {
+.search-form__checkbox-slider::before {
   content: "";
   display: block;
   width: 8px;
@@ -89,47 +89,47 @@
   transition: transform 0.4s;
 }
 
-.searchForm__checkbox-input:checked + .searchForm__checkbox-slider {
+.search-form__checkbox-input:checked + .search-form__checkbox-slider {
   background-color: #3ddc84;
 }
 
-.searchForm__checkbox-input:checked + .searchForm__checkbox-slider::before {
+.search-form__checkbox-input:checked + .search-form__checkbox-slider::before {
   transform: translateX(15px);
 }
 
 @media screen and (max-width: 1023px) {
-  .searchForm {
+  .search-form {
     padding: 70px 30px 10px;
   }
 
-  .searchForm__container-checkbox {
+  .search-form__container-checkbox {
     padding: 0 0 51px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .searchForm {
+  .search-form {
     padding: 70px var(--padding-mobile_2) 10px;
   }
 
-  .searchForm__container-checkbox {
+  .search-form__container-checkbox {
     padding: 0 0 63px;
   }
 
-  .searchForm__container-search {
+  .search-form__container-search {
     padding: 6px 6px 6px 12px;
   }
 
-  .searchForm__search {
+  .search-form__search {
     font-size: 16px;
     line-height: 16px;
   }
 
-  .searchForm__errors {
+  .search-form__errors {
     padding: 5px 0;
   }
 
-  .searchForm__checkbox-text {
+  .search-form__checkbox-text {
     font-size: 11px;
     line-height: 18px;
   }

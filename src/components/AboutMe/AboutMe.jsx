@@ -14,7 +14,7 @@ function AboutMe() {
                     <h3 className='about-me__name-student'>Сергей</h3>
                     <p className='about-me__briefly'>Фронтенд-разработчик, 26 лет</p>
                     <p className='about-me__text'>Я родился и живу в Тольятти, закончил Тольяттинский государственный университет ИМФИТ. В данный момент изучаю фронтенд разработку</p>
-                    <Link to="" className='about-me__link-git link hover'>Github</Link>
+                    <a href="https://github.com/Teprol?tab=repositories" className='about-me__link-git link hover' target="_blank" rel="noreferrer">Github</a>
                 </div>
                 <div className='about-me__foto-container'>
                     <img src={foto} className="image about-me__image" alt="Сергей сутдент фронтенд разработчик" />
