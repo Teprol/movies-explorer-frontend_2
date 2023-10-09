@@ -1,7 +1,7 @@
 //@ Первый файл будет содержать описание запросов к нашему Api
-class Api {
-  constructor(data) {
-    this._baseUrl = "https://api.bobrovdip.nomoredomainsicu.ru";
+class MainApi {
+  constructor() {
+    this._baseUrl = "http://localhost:3000";
     // this._authorization = "";
     // this._headers = {
     //   authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -23,6 +23,7 @@ class Api {
     if (res.ok) {
       return res.json();
     } else {
+      const lol = res.json();
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
     }
   };
@@ -35,7 +36,7 @@ class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ password, email, name }),
-    }).then(this.getStatus);
+    }).then(this._checkResponse);
   };
 
   // авторизация пользователя
@@ -49,7 +50,7 @@ class Api {
         password: password,
         email: email,
       }),
-    }).then(this.getStatus);
+    }).then(this._checkResponse);
   };
 
   // проверка токена
@@ -61,6 +62,8 @@ class Api {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(),
-    }).then(this.getStatus);
+    }).then(this._checkResponse);
   };
 }
+
+export const api = new MainApi();

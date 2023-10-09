@@ -1,11 +1,19 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 const ProtectedRoute = ({ element: Component, ...props }) => {
+  const { pathname } = useLocation(); //отселдить урл
   return props.loggedIn ? (
-    <Component {...props} />
+    <>
+      <Header loggedIn={props.loggedIn}></Header>
+      <Component {...props} />
+      {pathname === "/profile" ? "" : <Footer></Footer>}
+    </>
   ) : (
-    <Navigate to="/sign-in" replace />
+    <Navigate to="/" replace />
   );
 };
 

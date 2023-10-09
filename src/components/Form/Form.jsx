@@ -4,7 +4,7 @@ import "./Form.css";
 
 import Button from "../Button/Button";
 
-function Form({ name, children, className, valid }) {
+function Form({ name, children, className, valid, onSubmit }) {
   const [isProfileEdit, setProfileEdit] = React.useState(false);
 
   React.useEffect(() => {
@@ -22,6 +22,7 @@ function Form({ name, children, className, valid }) {
       noValidate
       method="POST"
       name={name}
+      onSubmit={onSubmit}
     >
       <fieldset className="form__fieldset">{children}</fieldset>
       <div className="form__container-button">
@@ -36,6 +37,7 @@ function Form({ name, children, className, valid }) {
                   }`}
                   type="button"
                   onClick={profileEdit}
+                  disabled={!valid}
                 >
                   Сохранить
                 </Button>
@@ -69,6 +71,7 @@ function Form({ name, children, className, valid }) {
                 valid ? "" : "button_disabled"
               }`}
               type="submit"
+              disabled={!valid}
             >
               Зарегистрироваться
             </Button>
@@ -90,6 +93,7 @@ function Form({ name, children, className, valid }) {
                 valid ? "" : "button_disabled"
               }`}
               type="submit"
+              disabled={!valid}
             >
               Войти
             </Button>

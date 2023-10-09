@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 
 // @ ипорт компоненов
@@ -13,10 +13,27 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import ErrorPage from "../ErrorPage/ErrorPage";
 
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.js"
+
+import { api } from "../../utils/MainApi";
+
 function App() {
   // стейт авторизации
   // todo вынести это в контекст чтобы можно было получить в любой части приложение
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  // хук навигации
+  const navigate = useNavigate();
+
+  function handleRegisterUser(userData) {
+    api
+      .regist(userData)
+      .then((res) => {
+        navigate("/signin");
+      })
+      .catch((err) => {
+        api.getInfoError("Регестрация не прошла", err);
+      });
+  };
 
   return (
     <div className="page">
@@ -36,9 +53,10 @@ function App() {
           path="/movies"
           element={
             <>
-              <Header loggedIn={loggedIn}></Header>
-              <Movies loggedIn={loggedIn}></Movies>
-              <Footer></Footer>
+              {/* <Header loggedIn={loggedIn}></Header> */}
+              <ProtectedRoute element={Movies} loggedIn={loggedIn}></ProtectedRoute>
+              {/* <Movies loggedIn={loggedIn}></Movies> */}
+              {/* <Footer></Footer> */}
             </>
           }
         ></Route>
@@ -47,9 +65,10 @@ function App() {
           path="/saved-movies"
           element={
             <>
-              <Header loggedIn={loggedIn}></Header>
-              <SavedMovies loggedIn={loggedIn}></SavedMovies>
-              <Footer></Footer>
+              {/* <Header loggedIn={loggedIn}></Header> */}
+              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn}></ProtectedRoute>
+              {/* <SavedMovies loggedIn={loggedIn}></SavedMovies> */}
+              {/* <Footer></Footer> */}
             </>
           }
         ></Route>
@@ -58,8 +77,9 @@ function App() {
           path="/profile"
           element={
             <>
-              <Header loggedIn={loggedIn}></Header>
-              <Profile loggedIn={loggedIn}></Profile>
+              {/* <Header loggedIn={loggedIn}></Header> */}
+              <ProtectedRoute element={Profile} loggedIn={loggedIn}></ProtectedRoute>
+              {/* <Profile loggedIn={loggedIn}></Profile> */}
             </>
           }
         ></Route>
@@ -71,7 +91,12 @@ function App() {
 
         <Route
           path="/signup"
-          element={<Register loggedIn={loggedIn}></Register>}
+          element={
+            <Register
+              loggedIn={loggedIn}
+              onRegist={handleRegisterUser}
+            ></Register>
+          }
         ></Route>
 
         <Route path="/*" element={<ErrorPage></ErrorPage>}></Route>
