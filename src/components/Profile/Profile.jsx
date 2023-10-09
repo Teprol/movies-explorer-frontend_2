@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 import "./Profile.css";
 
 import Form from "../Form/Form";
@@ -7,11 +8,13 @@ import Input from "../Input/Input";
 import useFormsValidation from "../../hoocks/useFormsValidation.js";
 import { paternEmail, paternName } from "../../utils/constants";
 
-function Profile() {
+function Profile({ loggedIn }) {
   const { handleChange, errors, valids, formValid, values } =
     useFormsValidation();
 
-  return (
+  return !loggedIn ? (
+    <Navigate to="/" replace />
+  ) : (
     <main className="profile">
       <h2 className="profile__title">Привет, Виталий!</h2>
       <Form

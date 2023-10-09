@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
 import "./Login.css";
 
 import Form from "../Form/Form";
@@ -9,11 +9,13 @@ import logo from "../../images/logo.svg";
 import useFormsValidation from "../../hoocks/useFormsValidation.js";
 import { paternEmail } from "../../utils/constants";
 
-function Login() {
+function Login({ loggedIn }) {
   const { handleChange, errors, valids, formValid, values } =
     useFormsValidation();
 
-  return (
+  return loggedIn ? (
+    <Navigate to="/" replace />
+  ) : (
     <main className="login">
       <div className="login__container">
         <Link to="/" className="hover login__logo">

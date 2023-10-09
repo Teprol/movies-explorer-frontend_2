@@ -1,16 +1,19 @@
 import React from "react";
-import './SavedMovies.css';
+import { Navigate } from "react-router-dom";
+import "./SavedMovies.css";
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-function SavedMovies() {
-    return (
-        <main className="movies">
-            <SearchForm></SearchForm>
-            <MoviesCardList></MoviesCardList>
-        </main>
-    );
-};
+function SavedMovies({ loggedIn }) {
+  return !loggedIn ? (
+    <Navigate to="/" replace />
+  ) : (
+    <main className="movies">
+      <SearchForm></SearchForm>
+      <MoviesCardList></MoviesCardList>
+    </main>
+  );
+}
 
 export default SavedMovies;
