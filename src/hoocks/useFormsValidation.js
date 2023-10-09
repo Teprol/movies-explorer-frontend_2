@@ -1,4 +1,5 @@
 import React from "react";
+import { ErrorContext } from "../context/ErrorContext";
 
 function useFormsValidation() {
   //стейты для отслеживания значений
@@ -6,6 +7,8 @@ function useFormsValidation() {
   const [errors, setErrors] = React.useState({});
   const [valids, setValids] = React.useState({});
   const [formValid, setFormValid] = React.useState(false);
+
+  const { error, setError } = React.useContext(ErrorContext);
 
   //функция записывающая стейты
   function handleChange(e) {
@@ -18,6 +21,7 @@ function useFormsValidation() {
     setErrors({ ...errors, [name]: element.validationMessage });
     setValids({ ...valids, [name]: valid });
     setFormValid(form.checkValidity());
+    setError(false);
   }
 
   return { values, errors, valids, handleChange, formValid };

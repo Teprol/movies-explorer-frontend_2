@@ -4,12 +4,16 @@ import "./Form.css";
 
 import Button from "../Button/Button";
 
+import { ErrorContext } from "../../context/ErrorContext";
+
 function Form({ name, children, className, valid, onSubmit }) {
   const [isProfileEdit, setProfileEdit] = React.useState(false);
+  const { error, setError } = React.useContext(ErrorContext);
 
   React.useEffect(() => {
     setProfileEdit(false);
-  }, []);
+    setError(false);
+  }, [setError]);
 
   function profileEdit() {
     setProfileEdit(true);
@@ -65,13 +69,13 @@ function Form({ name, children, className, valid, onSubmit }) {
         )}
         {name === "registration" ? (
           <>
-            <p className="form__submit-error"></p>
+            <p className="form__submit-error">{error ? "При регистрации пользователя произошла ошибка." : ""}</p>
             <Button
               className={`form__button button_submit ${
-                valid ? "" : "button_disabled"
+                valid && !error ? "" : "button_disabled"
               }`}
               type="submit"
-              disabled={!valid}
+              disabled={!valid && error}
             >
               Зарегистрироваться
             </Button>

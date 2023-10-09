@@ -13,10 +13,10 @@ function Register({ loggedIn, onRegist }) {
   const { handleChange, errors, valids, formValid, values } =
     useFormsValidation();
 
-    function handleSubmit(e) {
-      e.preventDefault();
-      onRegist(values);
-    };
+  function handleSubmit(e) {
+    e.preventDefault();
+    onRegist(values);
+  }
 
   return loggedIn ? (
     <Navigate to="/" replace />
@@ -27,7 +27,12 @@ function Register({ loggedIn, onRegist }) {
           <img src={logo} alt="Логотип" className="image" />
         </Link>
         <h2 className="register__title">Добро пожаловать!</h2>
-        <Form className="register__form" name="registration" valid={formValid} onSubmit={handleSubmit}>
+        <Form
+          className="register__form"
+          name="registration"
+          valid={formValid}
+          onSubmit={handleSubmit}
+        >
           <Input
             className="input_label-top"
             type="text"
