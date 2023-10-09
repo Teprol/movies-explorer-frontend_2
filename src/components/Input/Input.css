@@ -30,6 +30,10 @@
   color: #fff;
 }
 
+.input__input_no-valid {
+  color: #ee3465 !important;
+}
+
 .input__eror {
   margin: 0;
   min-height: 10px;
