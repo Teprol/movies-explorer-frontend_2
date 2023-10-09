@@ -56,6 +56,20 @@ function App() {
       });
   }
 
+  function handleLogin(userData) {
+    api
+      .authorization(userData)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        setLoggedIn(true);
+        navigate("/movies");
+      })
+      .catch((err) => {
+        api.getInfoError("Авторизация не удалась", err);
+        setError(true);
+      });
+  }
+
   return (
     <ErrorContext.Provider value={{ error, setError }}>
       <div className="page">
@@ -117,7 +131,7 @@ function App() {
 
           <Route
             path="/signin"
-            element={<Login loggedIn={loggedIn}></Login>}
+            element={<Login loggedIn={loggedIn} onLogin={handleLogin}></Login>}
           ></Route>
 
           <Route

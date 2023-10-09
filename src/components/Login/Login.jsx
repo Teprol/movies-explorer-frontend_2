@@ -9,9 +9,14 @@ import logo from "../../images/logo.svg";
 import useFormsValidation from "../../hoocks/useFormsValidation.js";
 import { paternEmail } from "../../utils/constants";
 
-function Login({ loggedIn }) {
+function Login({ loggedIn, onLogin }) {
   const { handleChange, errors, valids, formValid, values } =
     useFormsValidation();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onLogin(values);
+  }
 
   return loggedIn ? (
     <Navigate to="/" replace />
@@ -22,7 +27,12 @@ function Login({ loggedIn }) {
           <img src={logo} alt="Логотип" className="image" />
         </Link>
         <h2 className="login__title">Рады видеть!</h2>
-        <Form className="login__form" name="login" valid={formValid}>
+        <Form
+          className="login__form"
+          name="login"
+          valid={formValid}
+          onSubmit={handleSubmit}
+        >
           <Input
             className="input_label-top"
             type="email"

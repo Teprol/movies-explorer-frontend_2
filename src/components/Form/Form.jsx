@@ -69,7 +69,9 @@ function Form({ name, children, className, valid, onSubmit }) {
         )}
         {name === "registration" ? (
           <>
-            <p className="form__submit-error">{error ? "При регистрации пользователя произошла ошибка." : ""}</p>
+            <p className="form__submit-error">
+              {error ? "При регистрации пользователя произошла ошибка." : ""}
+            </p>
             <Button
               className={`form__button button_submit ${
                 valid && !error ? "" : "button_disabled"
@@ -91,13 +93,15 @@ function Form({ name, children, className, valid, onSubmit }) {
         )}
         {name === "login" ? (
           <>
-            <p className="form__submit-error"></p>
+            <p className="form__submit-error">
+              {error ? "Вы ввели неправильный логин или пароль." : ""}
+            </p>
             <Button
               className={`form__button button_submit ${
-                valid ? "" : "button_disabled"
+                valid && !error ? "" : "button_disabled"
               }`}
               type="submit"
-              disabled={!valid}
+              disabled={!valid && error}
             >
               Войти
             </Button>
