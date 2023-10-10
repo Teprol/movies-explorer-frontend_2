@@ -22,13 +22,13 @@ import { ErrorContext } from "../../context/ErrorContext";
 function App() {
   // стейт авторизации
   // todo вынести это в контекст чтобы можно было получить в любой части приложение
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   // стейт ошибок
   const [error, setError] = React.useState(false);
   // хук навигации
   const navigate = useNavigate();
 
-  React.useEffect(() => {}, [loggedIn]);
+  // React.useEffect(() => {}, [loggedIn]);
 
   //@ регистрация пользователя
   function handleRegisterUser(userData) {
@@ -56,6 +56,7 @@ function App() {
       });
   }
 
+  //@ авторизация пользователя
   function handleLogin(userData) {
     api
       .authorization(userData)

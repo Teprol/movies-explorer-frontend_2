@@ -23,7 +23,6 @@ class MainApi {
     if (res.ok) {
       return res.json();
     } else {
-      const lol = res.json();
       return Promise.reject(`Что-то пошло не так: ${res.status}`);
     }
   };

@@ -1,5 +1,4 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 import "./Profile.css";
 
 import Form from "../Form/Form";
@@ -12,9 +11,7 @@ function Profile({ loggedIn }) {
   const { handleChange, errors, valids, formValid, values } =
     useFormsValidation();
 
-  return !loggedIn ? (
-    <Navigate to="/" replace />
-  ) : (
+  return (
     <main className="profile">
       <h2 className="profile__title">Привет, Виталий!</h2>
       <Form
