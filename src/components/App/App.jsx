@@ -25,6 +25,10 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
   // стейт ошибок
   const [error, setError] = React.useState(false);
+  // стейт инфы пользователя
+  const [user, setUser] = React.useState({});
+  // стейт сохраненых фильмов
+  const [saveMovie, setSaveMovie] = React.useState([]);
   // хук навигации
   const navigate = useNavigate();
 
@@ -39,10 +43,25 @@ function App() {
         .catch((err) => {
           api.getInfoError("Токен не верный", err);
           setError(true);
+          localStorage.clear();
+          setLoggedIn(false);
         });
     }
     if (loggedIn) {
-      // Promise.all()
+      // кидаем запрос на инфу пользователя и сохр карточки пользователя
+      Promise.all([api.getUserInfo(jwt), api.getCardData(jwt)])
+        // получаем инфу в ответе
+        .then(([userData, savedMovies]) => {
+          // сохраняем все в стейты
+          setUser(userData);
+          setSaveMovie(savedMovies);
+        })
+        .catch((err) => {
+          api.getInfoError("Ошибка загрузки начальных данных", err);
+          setError(true);
+          localStorage.clear();
+          setLoggedIn(false);
+        });
     }
   }, [loggedIn]);
 
