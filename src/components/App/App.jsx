@@ -28,7 +28,23 @@ function App() {
   // хук навигации
   const navigate = useNavigate();
 
-  // React.useEffect(() => {}, [loggedIn]);
+  React.useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      api
+        .getToken(jwt)
+        .then(() => {
+          setLoggedIn(true);
+        })
+        .catch((err) => {
+          api.getInfoError("Токен не верный", err);
+          setError(true);
+        });
+    }
+    if (loggedIn) {
+      // Promise.all()
+    }
+  }, [loggedIn]);
 
   //@ регистрация пользователя
   function handleRegisterUser(userData) {

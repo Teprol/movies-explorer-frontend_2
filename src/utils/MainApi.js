@@ -1,4 +1,4 @@
-//@ Первый файл будет содержать описание запросов к нашему Api
+// Первый файл будет содержать описание запросов к нашему Api
 class MainApi {
   constructor() {
     this._baseUrl = "http://localhost:3000";
@@ -27,7 +27,7 @@ class MainApi {
     }
   };
 
-  // регистрация пользователя
+  //@ регистрация пользователя
   regist = ({ email, password, name }) => {
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
@@ -38,7 +38,7 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  // авторизация пользователя
+  //@ авторизация пользователя
   authorization = ({ email, password }) => {
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
@@ -52,7 +52,74 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  // проверка токена
+  //@ сохраненые фильмы пользователем
+  getCardData = (token) => {
+    return fetch(`${this._baseUrl}/movies`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }).then(this._checkResponse);
+  };
+
+  //@ сохранение фильма
+  saveMovie = (data, token) => {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        description: data.description,
+        year: data.year,
+        image: `https://api.nomoreparties.co${data.image.url}`,
+        trailerLink: data.trailerLink,
+        thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
+        movieId: data.id,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+      }),
+    }).then(this._checkResponse);
+  };
+
+  //@ возвращает инфу о пользователе
+  getUserInfo = (token) => {
+    return fetch(this._baseUrl + "/users/me", {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }).then(this._checkResponse);
+  };
+
+  //@ изменяет данные пользователя
+  setUserInfo = (name, email, token) => {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      }),
+    }).then(this._checkResponse);
+  };
+
+  //@ удаление фильма из сохраненых
+  deleteCard = (idCard, token) => {
+    return fetch(`${this._baseUrl}/movies/${idCard}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }).then(this._checkResponse);
+  };
+
+  //@ проверка токена
   getToken = (token) => {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
