@@ -15,6 +15,8 @@ function Movies() {
   const [movieFilter, setMovieFilter] = React.useState([]);
   // стейт объекта запроса поиска
   const [searchData, setSearchData] = React.useState({});
+  // стейт следит пустой результат поиска или нет
+  const [isSearchEmpty, setIsSearchEmpty] = React.useState(true);
 
   React.useEffect(() => {
     const savedSearch = JSON.parse(localStorage.getItem("searchQuery"));
@@ -44,6 +46,10 @@ function Movies() {
       return isCheckbox ? searchName && movie.duration <= 40 : searchName;
     });
     setMovieFilter(searchMovieArr);
+    // проверям дал ли поиск нам результат
+    searchMovieArr.length > 0
+      ? setIsSearchEmpty(true)
+      : setIsSearchEmpty(false);
     localStorage.setItem("moviesFiltered", JSON.stringify(searchMovieArr));
   }
 
@@ -74,7 +80,11 @@ function Movies() {
   return (
     <main className="movies">
       <SearchForm search={searchMovies} searchData={searchData}></SearchForm>
-      <MoviesCardList movieArr={movieFilter} error={error}></MoviesCardList>
+      <MoviesCardList
+        movieArr={movieFilter}
+        error={error}
+        isSearchEmpty={isSearchEmpty}
+      ></MoviesCardList>
     </main>
   );
 }

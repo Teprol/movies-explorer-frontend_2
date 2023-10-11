@@ -6,7 +6,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import Button from "../Button/Button";
 import Preloader from "../Preloader/Preloader"; //прелодер
 
-function MoviesCardList({ movieArr, error }) {
+function MoviesCardList({ movieArr, error, isSearchEmpty }) {
   const isLoading = false;
   const { pathname } = useLocation(); //отселдить урл
 
@@ -28,6 +28,8 @@ function MoviesCardList({ movieArr, error }) {
             Во время запроса произошла ошибка. Возможно, проблема с соединением
             или сервер недоступен. Подождите немного и попробуйте ещё раз
           </p>
+        ) : !isSearchEmpty ? (
+          <p>Ничего не найдено</p>
         ) : (
           ""
         )}

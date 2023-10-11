@@ -47,7 +47,17 @@ function SearchForm({ search, searchData }) {
   }
 
   function changeCheckbox() {
-    setCheckbox(!isCheckbox);
+    //если строка поиска пустая то чекбокс не поменяется и вылезет ошибка
+    if (searchString) {
+      setCheckbox(!isCheckbox);
+      search({
+        searchString: searchString,
+        isCheckbox: !isCheckbox,
+      });
+      setError(false);
+    } else {
+      setError(true);
+    }
   }
 
   return (
