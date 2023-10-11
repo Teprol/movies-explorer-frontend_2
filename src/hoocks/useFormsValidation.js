@@ -21,10 +21,15 @@ function useFormsValidation() {
     setErrors({ ...errors, [name]: element.validationMessage });
     setValids({ ...valids, [name]: valid });
     setFormValid(form.checkValidity());
+    // скидывать ошибку при вводе новых данных
     setError(false);
   }
 
-  return { values, errors, valids, handleChange, formValid };
+  function resetError() {
+    setError(false);
+  }
+
+  return { values, errors, valids, handleChange, formValid, resetError };
 }
 
 export default useFormsValidation;

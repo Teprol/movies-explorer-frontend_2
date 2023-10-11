@@ -3,8 +3,44 @@ import "./SearchForm.css";
 
 import Button from "../Button/Button";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import useFormsValidation from "../../hoocks/useFormsValidation.js";
 
-function SearchForm() {
+import { ErrorContext } from "../../context/ErrorContext";
+
+function SearchForm({ search }) {
+  // контекст ошибки
+  const { error, setError } = React.useContext(ErrorContext);
+  // хук на упр компонент
+  const { resetError } = useFormsValidation();
+  // текст поиска
+  const [searchString, setSearchString] = React.useState("");
+  // состояние чекбокса
+  const [isCheckbox, setCheckbox] = React.useState(false);
+
+  // получение и запись значений в стейт
+  function handleInputChange(e) {
+    // скидывает ошибку при вводе значения
+    resetError();
+    setSearchString(e.target.value);
+  }
+
+  // отправка запроса на поиск
+  function onSubmit(e) {
+    e.preventDefault();
+    // если не заполнен поиск будет ошибка
+    if (searchString) {
+      // в поиск прокинуть объект с состояним чекбокса и текстом запроса
+      search({ searchString, isCheckbox });
+      setError(false);
+    } else {
+      setError(true);
+    }
+  }
+
+  function changeCheckbox() {
+    setCheckbox(!isCheckbox);
+  }
+
   return (
     <section className="search-form">
       <form
@@ -13,6 +49,7 @@ function SearchForm() {
         className="search-form__form"
         name="get-movie"
         noValidate
+        onSubmit={onSubmit}
       >
         <fieldset className="search-form__fieldset-search">
           <div className="search-form__container-search">
@@ -20,15 +57,20 @@ function SearchForm() {
               type="search"
               className="search-form__search hover"
               placeholder="Фильм"
-              name="key-word"
+              name="search"
+              value={searchString}
+              onChange={handleInputChange}
             ></input>
             <Button className="search-form__submit button_search" type="submit">
               Поиск
             </Button>
           </div>
-          <p className="search-form__errors"></p>
+          <p className="search-form__errors">{error ? "Введите запрос" : ""}</p>
           <div className="search-form__container-checkbox">
-            <FilterCheckbox></FilterCheckbox>
+            <FilterCheckbox
+              checked={isCheckbox}
+              onCheck={changeCheckbox}
+            ></FilterCheckbox>
             <p className="search-form__checkbox-text">Короткометражки</p>
           </div>
         </fieldset>
