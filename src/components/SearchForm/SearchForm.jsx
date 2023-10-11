@@ -7,7 +7,7 @@ import useFormsValidation from "../../hoocks/useFormsValidation.js";
 
 import { ErrorContext } from "../../context/ErrorContext";
 
-function SearchForm({ search }) {
+function SearchForm({ search, searchData }) {
   // контекст ошибки
   const { error, setError } = React.useContext(ErrorContext);
   // хук на упр компонент
@@ -15,7 +15,16 @@ function SearchForm({ search }) {
   // текст поиска
   const [searchString, setSearchString] = React.useState("");
   // состояние чекбокса
-  const [isCheckbox, setCheckbox] = React.useState(false);
+  const [isCheckbox, setCheckbox] = React.useState(
+    searchData.isCheckbox || false
+  );
+
+  React.useEffect(() => {
+    if (searchData.searchString) {
+      setSearchString(searchData.searchString);
+    }
+    setCheckbox(searchData.isCheckbox || false);
+  }, [searchData]);
 
   // получение и запись значений в стейт
   function handleInputChange(e) {
