@@ -6,7 +6,7 @@ import Button from "../Button/Button";
 
 import { ErrorContext } from "../../context/ErrorContext";
 
-function Form({ name, children, className, valid, onSubmit }) {
+function Form({ name, children, className, valid, onSubmit, logOut }) {
   const [isProfileEdit, setProfileEdit] = React.useState(false);
   const { error, setError } = React.useContext(ErrorContext);
 
@@ -58,6 +58,7 @@ function Form({ name, children, className, valid, onSubmit }) {
                 <Link
                   className="form__link form__link_profile link hover"
                   to="/"
+                  onClick={logOut}
                 >
                   Выйти из аккаунта
                 </Link>

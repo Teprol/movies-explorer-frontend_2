@@ -3,7 +3,7 @@ import { ErrorContext } from "../context/ErrorContext";
 
 function useFormsValidation() {
   //стейты для отслеживания значений
-  const [values, setValue] = React.useState({name: '', email: '', password: ''});
+  const [values, setValue] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const [valids, setValids] = React.useState({});
   const [formValid, setFormValid] = React.useState(false);
@@ -23,13 +23,29 @@ function useFormsValidation() {
     setFormValid(form.checkValidity());
     // скидывать ошибку при вводе новых данных
     setError(false);
+    console.log(valids);
   }
 
   function resetError() {
     setError(false);
   }
 
-  return { values, errors, valids, handleChange, formValid, resetError, setValue };
+  const addDataInput = React.useCallback((data = {}) => {
+    setValue(data);
+    const validData = { ...data, name: true, email: true };
+    setValids(validData);
+  }, []);
+
+  return {
+    values,
+    errors,
+    valids,
+    handleChange,
+    formValid,
+    resetError,
+    setValue,
+    addDataInput,
+  };
 }
 
 export default useFormsValidation;

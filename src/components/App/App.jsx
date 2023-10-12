@@ -117,6 +117,12 @@ function App() {
       });
   }
 
+  function logOut() {
+    localStorage.clear()
+    setLoggedIn(false)
+    navigate('/')
+  }
+
   return (
     <>
       {isCheck ? (
@@ -175,6 +181,7 @@ function App() {
                       <ProtectedRoute
                         element={Profile}
                         loggedIn={loggedIn}
+                        logOut={logOut}
                       ></ProtectedRoute>
                       {/* <Profile loggedIn={loggedIn}></Profile> */}
                     </>

@@ -8,15 +8,23 @@ import useFormsValidation from "../../hoocks/useFormsValidation.js";
 import { CurrentUserContext } from "../../context/CurrentUserContext.js";
 import { paternEmail, paternName } from "../../utils/constants";
 
-function Profile({ loggedIn }) {
-  const { handleChange, errors, valids, formValid, values, setValue} =useFormsValidation();
+function Profile({ loggedIn, logOut }) {
+  const {
+    handleChange,
+    errors,
+    valids,
+    formValid,
+    values,
+    setValue,
+    addDataInput,
+  } = useFormsValidation();
   // контекст инфы пользователя
-  const currentUser = React.useContext(CurrentUserContext)
+  const currentUser = React.useContext(CurrentUserContext);
 
-  // React.useEffect(() => {
-  //   console.log(currentUser);
-  //   setValue(currentUser);
-  // }, [loggedIn])
+  React.useEffect(() => {
+    // setValue(currentUser);
+    addDataInput({ name: currentUser.name, email: currentUser.email });
+  }, [currentUser]);
 
   return (
     <main className="profile">
@@ -25,12 +33,12 @@ function Profile({ loggedIn }) {
         className="form_profile profile__form"
         name="profile"
         valid={formValid}
+        logOut={logOut}
       >
         <Input
           type="text"
           name="name"
           title="Имя"
-          // value="Виталий"
           placeholder="введите имя"
           minLength="2"
           maxLength="20"
@@ -45,7 +53,6 @@ function Profile({ loggedIn }) {
           type="email"
           name="email"
           title="E-mail"
-          // value="pochta@yandex.ru"
           placeholder="введите почту"
           minLength="5"
           onChange={handleChange}
