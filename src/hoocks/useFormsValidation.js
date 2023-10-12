@@ -3,7 +3,7 @@ import { ErrorContext } from "../context/ErrorContext";
 
 function useFormsValidation() {
   //стейты для отслеживания значений
-  const [values, setValue] = React.useState({});
+  const [values, setValue] = React.useState({name: '', email: '', password: ''});
   const [errors, setErrors] = React.useState({});
   const [valids, setValids] = React.useState({});
   const [formValid, setFormValid] = React.useState(false);
@@ -29,7 +29,7 @@ function useFormsValidation() {
     setError(false);
   }
 
-  return { values, errors, valids, handleChange, formValid, resetError };
+  return { values, errors, valids, handleChange, formValid, resetError, setValue };
 }
 
 export default useFormsValidation;

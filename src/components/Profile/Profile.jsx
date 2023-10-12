@@ -5,15 +5,22 @@ import Form from "../Form/Form";
 import Input from "../Input/Input";
 
 import useFormsValidation from "../../hoocks/useFormsValidation.js";
+import { CurrentUserContext } from "../../context/CurrentUserContext.js";
 import { paternEmail, paternName } from "../../utils/constants";
 
 function Profile({ loggedIn }) {
-  const { handleChange, errors, valids, formValid, values } =
-    useFormsValidation();
+  const { handleChange, errors, valids, formValid, values, setValue} =useFormsValidation();
+  // контекст инфы пользователя
+  const currentUser = React.useContext(CurrentUserContext)
+
+  // React.useEffect(() => {
+  //   console.log(currentUser);
+  //   setValue(currentUser);
+  // }, [loggedIn])
 
   return (
     <main className="profile">
-      <h2 className="profile__title">Привет, Виталий!</h2>
+      <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
       <Form
         className="form_profile profile__form"
         name="profile"
@@ -31,6 +38,7 @@ function Profile({ loggedIn }) {
           errors={errors.name}
           valids={valids.name}
           pattern={paternName}
+          value={values.name || ""}
         ></Input>
         <Input
           className="input_no-border"
@@ -44,6 +52,7 @@ function Profile({ loggedIn }) {
           errors={errors.email}
           valids={valids.email}
           pattern={paternEmail}
+          value={values.email || ""}
         ></Input>
       </Form>
     </main>
