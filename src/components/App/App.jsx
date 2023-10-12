@@ -24,7 +24,9 @@ import { CurrentUserContext } from "../../context/CurrentUserContext.js";
 function App() {
   // стейт авторизации
   // todo вынести это в контекст чтобы можно было получить в любой части приложение
+  // стейт состояния авторизации
   const [loggedIn, setLoggedIn] = React.useState(false);
+  // стейт загруки страницы
   const [isCheck, setIsCheck] = React.useState(true);
   // стейт ошибок
   const [error, setError] = React.useState(false);
@@ -32,6 +34,8 @@ function App() {
   const [user, setUser] = React.useState({});
   // стейт сохраненых фильмов
   const [saveMovie, setSaveMovie] = React.useState([]);
+  // стейт успешного прохода запроса редактирования профиля
+  const [isSuccessful, setIsSuccessful] = React.useState(false);
   // хук навигации
   const navigate = useNavigate();
 
@@ -131,10 +135,12 @@ function App() {
       .setUserInfo(name, email, jwt)
       .then((newInfoUser) => {
         setUser(newInfoUser);
+        setIsSuccessful(true);
       })
       .catch((err) => {
         api.getInfoError("Данные не изменены", err);
         setError(true);
+        setIsSuccessful(false);
       });
   }
 
@@ -198,6 +204,8 @@ function App() {
                         loggedIn={loggedIn}
                         logOut={logOut}
                         editUser={handleEditUser}
+                        isSuccessful={isSuccessful}
+                        setIsSuccessful={setIsSuccessful}
                       ></ProtectedRoute>
                       {/* <Profile loggedIn={loggedIn}></Profile> */}
                     </>

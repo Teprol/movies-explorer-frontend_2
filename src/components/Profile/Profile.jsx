@@ -8,7 +8,13 @@ import useFormsValidation from "../../hoocks/useFormsValidation.js";
 import { CurrentUserContext } from "../../context/CurrentUserContext.js";
 import { paternEmail, paternName } from "../../utils/constants";
 
-function Profile({ loggedIn, logOut, editUser }) {
+function Profile({
+  loggedIn,
+  logOut,
+  editUser,
+  isSuccessful,
+  setIsSuccessful,
+}) {
   const {
     handleChange,
     errors,
@@ -18,6 +24,8 @@ function Profile({ loggedIn, logOut, editUser }) {
     setValue,
     addDataInput,
   } = useFormsValidation();
+  // стейт следит за тем что данные профиля не равны начальным
+  const [isInputChanged, setIsInputChanged] = React.useState(false);
   // контекст инфы пользователя
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -26,6 +34,14 @@ function Profile({ loggedIn, logOut, editUser }) {
     addDataInput({ name: currentUser.name, email: currentUser.email });
   }, [currentUser]);
 
+  //@ проврка на изменение данных
+  React.useEffect(() => {
+    const hasChanges =
+      values.name !== currentUser.name || values.email !== currentUser.email;
+    hasChanges ? setIsInputChanged(true) : setIsInputChanged(false);
+  }, [values, currentUser]);
+
+  // отправка формы
   function handleSubmit(e) {
     e.preventDefault();
     editUser(values.name, values.email);
@@ -40,6 +56,9 @@ function Profile({ loggedIn, logOut, editUser }) {
         valid={formValid}
         logOut={logOut}
         onSubmit={handleSubmit}
+        isSuccessful={isSuccessful}
+        setIsSuccessful={setIsSuccessful}
+        isInputChanged={isInputChanged}
       >
         <Input
           type="text"
