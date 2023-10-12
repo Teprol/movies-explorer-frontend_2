@@ -8,7 +8,7 @@ import useFormsValidation from "../../hoocks/useFormsValidation.js";
 import { CurrentUserContext } from "../../context/CurrentUserContext.js";
 import { paternEmail, paternName } from "../../utils/constants";
 
-function Profile({ loggedIn, logOut }) {
+function Profile({ loggedIn, logOut, editUser }) {
   const {
     handleChange,
     errors,
@@ -21,10 +21,15 @@ function Profile({ loggedIn, logOut }) {
   // контекст инфы пользователя
   const currentUser = React.useContext(CurrentUserContext);
 
+  //@ добавление информации пользователя
   React.useEffect(() => {
-    // setValue(currentUser);
     addDataInput({ name: currentUser.name, email: currentUser.email });
   }, [currentUser]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    editUser(values.name, values.email);
+  }
 
   return (
     <main className="profile">
@@ -34,6 +39,7 @@ function Profile({ loggedIn, logOut }) {
         name="profile"
         valid={formValid}
         logOut={logOut}
+        onSubmit={handleSubmit}
       >
         <Input
           type="text"

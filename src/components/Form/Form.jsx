@@ -39,7 +39,7 @@ function Form({ name, children, className, valid, onSubmit, logOut }) {
                   className={`form__button button_submit ${
                     valid ? "" : "button_disabled"
                   }`}
-                  type="button"
+                  type="submit"
                   onClick={profileEdit}
                   disabled={!valid}
                 >

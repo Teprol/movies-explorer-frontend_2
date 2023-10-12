@@ -117,10 +117,25 @@ function App() {
       });
   }
 
+  //@ выход из аккаунта
   function logOut() {
-    localStorage.clear()
-    setLoggedIn(false)
-    navigate('/')
+    localStorage.clear();
+    setLoggedIn(false);
+    navigate("/");
+  }
+
+  //@ редактирование профиля пользователя
+  function handleEditUser(name, email) {
+    const jwt = localStorage.getItem("jwt");
+    api
+      .setUserInfo(name, email, jwt)
+      .then((newInfoUser) => {
+        setUser(newInfoUser);
+      })
+      .catch((err) => {
+        api.getInfoError("Данные не изменены", err);
+        setError(true);
+      });
   }
 
   return (
@@ -182,6 +197,7 @@ function App() {
                         element={Profile}
                         loggedIn={loggedIn}
                         logOut={logOut}
+                        editUser={handleEditUser}
                       ></ProtectedRoute>
                       {/* <Profile loggedIn={loggedIn}></Profile> */}
                     </>

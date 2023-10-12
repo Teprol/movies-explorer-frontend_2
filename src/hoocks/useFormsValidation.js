@@ -23,7 +23,6 @@ function useFormsValidation() {
     setFormValid(form.checkValidity());
     // скидывать ошибку при вводе новых данных
     setError(false);
-    console.log(valids);
   }
 
   function resetError() {
@@ -34,6 +33,7 @@ function useFormsValidation() {
     setValue(data);
     const validData = { ...data, name: true, email: true };
     setValids(validData);
+    setFormValid(true);
   }, []);
 
   return {
