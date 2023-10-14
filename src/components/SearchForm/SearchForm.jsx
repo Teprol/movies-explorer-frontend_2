@@ -24,6 +24,7 @@ function SearchForm({ search, searchData }) {
       setSearchString(searchData.searchString);
     }
     setCheckbox(searchData.isCheckbox || false);
+    setError(false);
   }, [searchData]);
 
   // получение и запись значений в стейт

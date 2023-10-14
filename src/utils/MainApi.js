@@ -110,7 +110,7 @@ class MainApi {
   };
 
   //@ удаление фильма из сохраненых
-  deleteCard = (idCard, token) => {
+  deleteMovie = (idCard, token) => {
     return fetch(`${this._baseUrl}/movies/${idCard}`, {
       method: "DELETE",
       headers: {

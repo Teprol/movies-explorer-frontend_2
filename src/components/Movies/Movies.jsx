@@ -6,7 +6,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 import { apiMovi } from "../../utils/MoviesApi";
 
-function Movies() {
+function Movies({saveMovie, addMovie}) {
   // стейт переменная фильмов с api
   const [movies, setMovies] = React.useState([]);
   // стейт ошибок запроса
@@ -84,6 +84,8 @@ function Movies() {
         movieArr={movieFilter}
         error={error}
         isSearchEmpty={isSearchEmpty}
+        saveMovie={saveMovie}
+        addMovie={addMovie}
       ></MoviesCardList>
     </main>
   );

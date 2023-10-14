@@ -144,6 +144,36 @@ function App() {
       });
   }
 
+  //@ удаление фильмы из сохраненых
+  function handleDeleteMovie(moviId) {
+    const jwt = localStorage.getItem("jwt");
+    api.deleteMovie(moviId, jwt)
+      .then(() => {
+        setSaveMovie(saveMovie.filter(movie => { return movie._id !== moviId }))
+      })
+      .catch((err) => {
+        api.getInfoError("Фильм не удален", err);
+      })
+  }
+
+  //@ сохранения или удаление фильма
+  function handleMovieLike(movie) {
+    const jwt = localStorage.getItem("jwt");
+    // проверка на наличие в сохраненых
+    const isMovieInSavedMovies = saveMovie.find((savedMovie) => savedMovie.movieId === movie.id);
+    if (isMovieInSavedMovies) {
+      handleDeleteMovie(isMovieInSavedMovies._id);
+    } else {
+      api.saveMovie(movie, jwt)
+        .then((res) => {
+          setSaveMovie([res, ...saveMovie]);
+        })
+        .catch((err) => {
+          api.getInfoError("возникла ошибка при сохранении фильма", err);
+        })
+    }
+  }
+
   return (
     <>
       {isCheck ? (
@@ -172,6 +202,8 @@ function App() {
                       <ProtectedRoute
                         element={Movies}
                         loggedIn={loggedIn}
+                        saveMovie={saveMovie}
+                        addMovie={handleMovieLike}
                       ></ProtectedRoute>
                       {/* <Movies loggedIn={loggedIn}></Movies> */}
                       {/* <Footer></Footer> */}
@@ -187,6 +219,8 @@ function App() {
                       <ProtectedRoute
                         element={SavedMovies}
                         loggedIn={loggedIn}
+                        saveMovie={saveMovie}
+                        deliteMovie={handleDeleteMovie}
                       ></ProtectedRoute>
                       {/* <SavedMovies loggedIn={loggedIn}></SavedMovies> */}
                       {/* <Footer></Footer> */}

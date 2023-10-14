@@ -5,14 +5,14 @@ import "./MoviesCard.css";
 import image from "../../images/pic__COLOR_pic.jpg";
 import Button from "../Button/Button";
 
-function MoviesCard({ className, dataMovie }) {
-  const [isMovieSave, setMovieSave] = React.useState(false);
+function MoviesCard({ className, dataMovie, saveMovie, addMovie, deliteMovie }) {
+  // const [isMovieSave, setMovieSave] = React.useState(false);
+  // проверка на лайк
+  const isLiked = saveMovie ? saveMovie.find((item) => item.movieId === dataMovie.id) : false;
+  // следим за адресом
   const { pathname } = useLocation(); //отселдить урл
 
-  function handleMovieSave() {
-    setMovieSave(!isMovieSave);
-  }
-
+  // функция конвертирует время
   function convertsTime(time) {
     const hours = Math.floor(parseInt(time) / 60);
     const minutes = Math.floor(parseInt(time) % 60);
@@ -36,24 +36,24 @@ function MoviesCard({ className, dataMovie }) {
         >
           <img
             className="movies-card__image image"
-            src={`https://api.nomoreparties.co/${dataMovie.image.url}`}
-            alt={dataMovie.nameRU}
+            src={pathname === '/movies' ? `https://api.nomoreparties.co${dataMovie.image.url}` : dataMovie.image}
+            alt={dataMovie.name}
           />
         </a>
         {pathname === "/saved-movies" ? (
           <Button
             className="movies-card__button button hover button_card-delete"
             type="button"
+            onClick={() => deliteMovie(dataMovie._id)}
           ></Button>
         ) : (
           <Button
-            className={`movies-card__button button hover ${
-              isMovieSave ? "button_card-save" : "button_card"
-            }`}
+            className={`movies-card__button button hover ${isLiked ? "button_card-save" : "button_card"
+              }`}
             type="button"
-            onClick={handleMovieSave}
+            onClick={() => addMovie(dataMovie)}
           >
-            {isMovieSave ? "" : "Сохранить"}
+            {isLiked ? "" : "Сохранить"}
           </Button>
         )}
       </article>

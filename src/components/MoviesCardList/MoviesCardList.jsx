@@ -6,7 +6,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import Button from "../Button/Button";
 import Preloader from "../Preloader/Preloader"; //прелодер
 
-function MoviesCardList({ movieArr, error, isSearchEmpty }) {
+function MoviesCardList({ movieArr, error, isSearchEmpty, saveMovie, addMovie, deliteMovie }) {
   const isLoading = false;
   const { pathname } = useLocation(); //отселдить урл
 
@@ -19,7 +19,10 @@ function MoviesCardList({ movieArr, error, isSearchEmpty }) {
               <MoviesCard
                 className="movies-card-list__item"
                 dataMovie={movie}
-                key={movie.id}
+                key={movie.id || movie.movieId}
+                saveMovie={saveMovie}
+                addMovie={addMovie}
+                deliteMovie={deliteMovie}
               ></MoviesCard>
             );
           })
