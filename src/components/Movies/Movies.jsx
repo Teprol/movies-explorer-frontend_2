@@ -17,6 +17,8 @@ function Movies({saveMovie, addMovie}) {
   const [searchData, setSearchData] = React.useState({});
   // стейт следит пустой результат поиска или нет
   const [isSearchEmpty, setIsSearchEmpty] = React.useState(true);
+  // стейт загрузки
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     const savedSearch = JSON.parse(localStorage.getItem("searchQuery"));
@@ -58,6 +60,7 @@ function Movies({saveMovie, addMovie}) {
     localStorage.setItem("searchQuery", JSON.stringify(objectSearch));
     if (movies.length === 0) {
       //todo  тут нужна загрузка прелодера
+      setIsLoading(true);
       apiMovi
         .getMovies()
         .then((res) => {
@@ -71,6 +74,7 @@ function Movies({saveMovie, addMovie}) {
         })
         .finally(() => {
           //todo окончание загрузки
+          setIsLoading(false);
         });
     } else {
       filterMovie(objectSearch, movies);
@@ -86,6 +90,7 @@ function Movies({saveMovie, addMovie}) {
         isSearchEmpty={isSearchEmpty}
         saveMovie={saveMovie}
         addMovie={addMovie}
+        isLoading={isLoading}
       ></MoviesCardList>
     </main>
   );

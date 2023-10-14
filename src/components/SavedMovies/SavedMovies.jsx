@@ -33,7 +33,6 @@ function SavedMovies({ loggedIn, saveMovie, deliteMovie }) {
     searchMovieArr.length > 0
       ? setIsSearchEmpty(true)
       : setIsSearchEmpty(false);
-    console.log(searchMovieArr);
   }
 
   function searchMovies(objectSearch) {
