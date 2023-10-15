@@ -1,7 +1,7 @@
 // Первый файл будет содержать описание запросов к нашему Api
 class MainApi {
   constructor() {
-    this._baseUrl = "https://api.bobrovdip.nomoredomainsicu.ru";
+    this._baseUrl = "http://localhost:3000";
     // this._authorization = "";
     // this._headers = {
     //   authorization: `Bearer ${localStorage.getItem("token")}`,
