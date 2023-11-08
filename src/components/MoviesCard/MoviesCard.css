@@ -10,6 +10,12 @@
 }
 
 .movies-card__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 50%;
+  flex: 1;
+
   margin: 0;
   font-size: 15px;
   font-style: normal;
@@ -25,6 +31,7 @@
 }
 
 .movies-card__header {
+  column-gap: 10px;
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
